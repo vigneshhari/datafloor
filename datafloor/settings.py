@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'account',
     'django.contrib.admin',
     'django.contrib.auth',
-# Application definition
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',

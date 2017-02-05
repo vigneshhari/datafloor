@@ -1,6 +1,8 @@
-<form action="/login" method="POST">
+<form action="/signup" method="POST">
 {% csrf_token %}
+<input type="text" name="name" value="Name">
 <input type="email" name="email" value="Email">
 <input type="password" name="password" value="password" >
+<input type="number" name="phoneno" value="Phone Number"  >
 <input type="submit" name="submit" value="Log In">
 </form>
