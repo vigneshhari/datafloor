@@ -25,14 +25,16 @@ SECRET_KEY = '-+en2w&^&=x71d7z#2vao0h!ct(h_5k5nuj5rwq+g*)#b@x1rc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'139.59.60.22' ]
+ALLOWED_HOSTS = [u'139.59.60.22',u'127.0.0.1' ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'account',
     'django.contrib.admin',
     'django.contrib.auth',
+# Application definition
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -54,7 +56,7 @@ ROOT_URLCONF = 'datafloor.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
