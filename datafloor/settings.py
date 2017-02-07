@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [u'139.59.60.22',u'127.0.0.1' ]
 # Application definition
 
 INSTALLED_APPS = [
+    'userclassifier',
     'account',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,6 +53,16 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'datafloor.urls'
 
+STATIC_ROOT= "staticfiles"
+STATIC_URL = 'static'
+
+
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -70,6 +81,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'datafloor.wsgi.application'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases

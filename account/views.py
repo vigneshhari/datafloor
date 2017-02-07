@@ -15,7 +15,7 @@ import hashlib
 def login(request):
 	if(request.method != "POST"):
 		return render(request,"login.html")
-	password = request.POST.get("password")
+	password = hashlib.sha256(bytes(request.POST.get('password',''))).hexdigest()
 	email = request.POST.get("email")
 	auth = User.objects.all().filter(email = email )
 	for i in auth:
@@ -26,7 +26,7 @@ def login(request):
 def signup(request):
 	if(request.method != "POST"):
 		return render(request,"signup.html")
-	password = request.POST.get("password")
+	password = hashlib.sha256(bytes(request.POST.get('password',''))).hexdigest() #Hasing Password For Better Security
 	name = request.POST.get("name")
 	phno = request.POST.get("phoneno")
 	email = request.POST.get("email")

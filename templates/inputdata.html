@@ -1,0 +1,15 @@
+<form action="/updateclass" method="POST">
+<input type="hidden" name="key" value="{{key}}">
+<input type="hidden" name="classifierid" value="{{id}}">
+{% csrf_token %}
+<p>Input Data <br></p>
+{% for x in input %}
+<input type="checkbox" name="{{x}}" label="{{x}}" value="x">
+<label for={{x}}>{{x}}<br></label>
+{% endfor %}
+{% for y in input %}
+<input type="radio" name="y" value="{{y}}" >
+<label for={{y}}>{{y}}</label>
+{% endfor %}
+<input type="submit" name="submit" value="Submit">
+</form>
