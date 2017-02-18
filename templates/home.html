@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    		{% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataFloor</title>
+    <link rel="stylesheet" href="{%static 'css/bulma.css' %}" media="all">
+    <link rel="stylesheet" href="{%static 'css/font-awesome.min.css' %}" media="all">
+    <script src="{%static 'js/Jquery.js' %}"></script>
+</head>
+<body>
+
+
+<section class="hero is-fullheight image" style="-webkit-box-shadow:0 0 30px black;
+-moz-box-shadow: 0 0 30px black;
+box-shadow:0 0 30px black; background-attachment: fixed;background-repeat: no-repeat;background-position: center; background-size:cover; background-image: url({%static 'img/datafloorlanding_bg.png' %})">
+    <!-- Hero header: will stick at the top -->
+    <nav class="nav">
+        <div class="nav-left">
+            <a class="nav-item">
+                <img src="{%static 'img/logo.png' %}" style="max-width: 25px" alt="Datafloor logo">
+            </a>
+        </div>
+
+
+        <span class="nav-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </span>
+
+
+        <div class="nav-right nav-menu">
+            <a class="nav-item">
+                Home
+            </a>
+            <a class="nav-item">
+                Documentation
+            </a>
+            <a class="nav-item">
+                Pricing
+            </a>
+
+            <span class="nav-item">
+
+      <a href="/login" class="button is-primary">
+       <i class="fa fa-sign-in" aria-hidden="true"></i>
+        <span>&nbsp&nbsp&nbspLogin</span>
+      </a>
+    </span>
+        </div>
+    </nav>
+
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1   class="title" style="font-size: 7.5em ; font-family: Roboto ;color: #69306D">
+            <strong>D</strong>ata <span style="color: #D36060"><strong>F</strong>loor</span>
+            </h1>
+            <h2 class="subtitle" style="color: #A5668B">
+                The Data Folks
+            </h2>
+        </div>
+    </div>
+
+
+</section>
+
+
+<div class="content" style="font-family:Roboto;padding-top: 90px ; padding-bottom: 90px ; background-color: whitesmoke">
+    <h2 align="center" ><strong>Machine Learning For Everyone<br><br></strong></h2>
+    <p align="center"><br>DataFloor Enables Developers try out Machine Learning and implement it in their Projects without any knowledge in it  </p>
+    <ul align="center" style="list-style: none">
+        <li>We Help Developers to -</li>
+        <li>Upload Their Data and use it to train a model to classify their data</li>
+        <li>Choose from various pre trained datasets to get accurate results for Known Cases</li>
+        <li>More Features Comming Soon..</li>
+    </ul>
+</div>
+
+
+<div class="columns" style="padding-top:-10px;-webkit-box-shadow:0 0 30px black;
+-moz-box-shadow: 0 0 30px black;
+box-shadow:0 0 30px black;background-color: #F7F2F3">
+    <div class="column is-half" style="margin-top: -10px ; margin-bottom: -10px">
+        <section class="hero  is-fullheight" style="background-color:#D36060;padding-top: -10px ; padding-bottom: -10px">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title" align="center" style="font-variant:all-petite-caps;color:whitesmoke;font-family: Raleway ; font-weight: 350; font-size: 4.5em">
+                    Introducing the ML Market<br>
+                    </h1>
+                    <h2 class="subtitle" align="center" style="color:whitesmoke;font-family: Raleway ; font-weight: 150; padding-top: 30px">
+                        A collection of pre trained datasets you can use right away
+                    </h2>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="column is-half" style=" margin-bottom: -40px ; padding-right: -10px">
+
+        <div class="parent" style="position: relative;top: 0;left: 0; margin-left: -22px" >
+            <img class="image" src ="{%static 'img/store_front-01.png' %}" style="position: relative ;top: 0;left: 0; ">
+            <img  class="image" src ="{%static 'img/store_back-01.png' %}" style="position: absolute ;top: 0;left: 0;">
+        </div>
+
+    </div>
+</div>
+
+<div class="content" style="font-family:Roboto;padding-top: 120px ; padding-bottom: 100px ;margin-top: 20px; margin-bottom: -20px; background-color: whitesmoke">
+    <h2 align="center" ><strong>We'll Launch Soon<br><br></strong></h2>
+    <p align="center"><br> <strong>Current Status</strong>  </p><br>
+    <progress  class="progress is-small" value="15" max="100" style=" margin-left: auto; margin-right:auto;text-align: center; max-width: 500px"></progress>
+    <p align="center"><br> Working on our Alpha <br> </p>
+
+</div>
+
+
+<section id="newsletter" class="hero is-primary" style="-webkit-box-shadow:0 0 30px black;
+-moz-box-shadow: 0 0 30px black;
+box-shadow:0 0 30px black; padding-top: 40px ; padding-bottom: 40px">
+    <div class="hero-body">
+        <div class="container">
+            <!-- Begin MailChimp Signup Form -->
+            <div id="mc_embed_signup" class="columns is-vcentered">
+                <div class="column is-one-third is-left" style="color: dimgrey">
+                    <p class="title">Bulma <strong>Newsletter</strong></p>
+                    <p class="subtitle">Get notified when v1 is ready!</p>
+                </div>
+
+                <div class="column">
+                    <form action="#" method="post" >
+                        <div id="mc_embed_signup_scroll">
+                            <div class="control is-grouped">
+                                <div class="control has-icon is-expanded">
+                                    <input type="email" value="" name="EMAIL" class="input is-flat required email" id="mce-EMAIL" placeholder="email address" required>
+                                    <span class="icon is-small">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                                </div>
+                                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button is-white is-outlined">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--End mc_embed_signup-->
+        </div>
+    </div>
+</section>
+
+
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="content has-text-centered">
+            <p>
+                <strong>Data Floor</strong> by <a href="http://zenindia.xyz">Zentech</a>. Incubated At Startup Village
+            </p>
+            <p>
+                <a class="icon" href="#">
+                    <i class="fa fa-github"></i>
+                </a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

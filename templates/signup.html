@@ -1,8 +1,72 @@
-<form action="/signup" method="POST">
-{% csrf_token %}
-<input type="text" name="name" value="Name">
-<input type="email" name="email" value="Email">
-<input type="password" name="password" value="password" >
-<input type="number" name="phoneno" value="Phone Number"  >
-<input type="submit" name="submit" value="Log In">
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+        {% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Datafloor Signup</title>
+     <link rel="stylesheet" href="{%static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/bulma.css' %}">
+</head>
+<body>
+
+
+<section class="hero is-fullheight is-dark is-bold">
+    <div class="hero-body">
+        <div class="container has-text-centered" >
+            <h1   class="title" style="font-size: 5.5em ; font-family: Roboto ;color: whitesmoke">
+                <strong>D</strong>ata <strong>F</strong>loor
+            </h1>
+
+        </div>
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-vcentered">
+                <div class="column is-4 is-offset-4" style="min-width: 300px ; height: auto">
+                    <h1 class="title">
+                        Register an Account
+                    </h1>
+                    <div class="box" >
+                        <form action="/signup" method="POST">
+                    {% csrf_token %}
+                        <label class="label">Name</label>
+                        <p class="control">
+                            <input class="input" type="text" name="name" placeholder="Darth Vader">
+                        </p>
+                        <label class="label">Email</label>
+                        <p class="control">
+                            <input class="input" type="email" name="email" placeholder="vader@firstorder.org">
+                        </p>
+                        <label class="label">Phone Number</label>
+                        <p class="control">
+                            <input class="input" type="number" name="phoneno" placeholder="Phone Number">
+                        </p>
+                        <hr>
+                        <label class="label">Password</label>
+                        <p class="control">
+                            <input class="input" type="password" name="password" placeholder="Password - Lukeismyson">
+                        </p>
+                        <label class="label">Confirm Password</label>
+                        <p class="control">
+                            <input class="input" type="password" name="cpassword" placeholder="Password">
+                        </p>
+                        <hr>
+                        <p class="control">
+                            <button class="button is-primary">Register</button>
+                        </p>
+                        <p style="color: #D36060 ; font-variant: all-petite-caps" align="center" >{{ error }}</p>
+                    </div>
+                    <p class="has-text-centered">
+                        <a href="/login">Login</a>
+                        |
+                        <a href="#">Need help?</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

@@ -32,6 +32,8 @@ ALLOWED_HOSTS = [u'139.59.60.22',u'127.0.0.1' ]
 
 INSTALLED_APPS = [
     'userclassifier',
+    'classifier',
+    'mlmarket',
     'account',
     'django.contrib.admin',
     'django.contrib.auth',

@@ -1,5 +1,223 @@
-<form action="/upload" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-   	<input type="file" name="data">
-    <input type="submit" value="submit" />
-</form>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+        		{% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Upload - DataFloor</title>
+    <link rel="stylesheet" href="{%static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/bulma.css' %}">
+        <link rel="stylesheet" type="text/css" href="{%static 'css/fileupload.css' %}">
+
+</head>
+<!--
+First landing page user sees all classifiers he made till now in card view .. option to train and option to classify - and train to test and api key and id
+Second landing page to upload a classifier - redirect to chosing the input and output options - back to dashboard
+Third option ML market Place
+Fourth option User details and feedback
+!-->
+
+
+
+<style>
+
+
+.body{
+    background-color: white;
+    color: white;
+}
+
+.morris-hover{position:absolute;z-index:1000}.morris-hover.morris-default-style{border-radius:10px;padding:6px;color:#666;background:rgba(255,255,255,0.8);border:solid 2px rgba(230,230,230,0.8);font-family:sans-serif;font-size:12px;text-align:center}.morris-hover.morris-default-style .morris-hover-row-label{font-weight:bold;margin:0.25em 0}
+.morris-hover.morris-default-style .morris-hover-point{white-space:nowrap;margin:0.1em 0}
+    body {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        height: 100%;
+    }
+    .button.is-success {
+        background-color: #2EB398;
+    }
+    .nav.is-dark {
+        background-color: #232B2D;
+        color: #F6F7F7;
+    }
+    .nav.is-dark .nav-item a, .nav.is-dark a.nav-item {
+        color: #F6F7F7;
+    }
+    .nav.is-dark .nav-item a.button.is-default {
+        color: #F6F7F7;
+        background-color: transparent;
+        border-width: 2px;
+    }
+    .aside {
+        background-color: #354052;
+        margin-right: -10px;
+    }
+    .aside .main {
+        padding: 40px;
+        color: #6F7B7E;
+    }
+    .aside .title {
+        color: #6F7B7E;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .aside .main .item {
+        display: block;
+        padding: 10px 0;
+        color: #6F7B7E;
+    }
+    .aside .main .item.active {
+        color: #F6F7F7;
+    }
+    .aside .main .icon {
+        font-size: 19px;
+        padding-right: 30px;
+    }
+    .aside .main .name {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .admin-panel {
+        min-height: 100%;
+        margin-bottom: -10px;
+        padding-bottom: -3px;
+    }
+    .content {
+        display: block;
+        background-color: #fff;
+        padding: 40px 20px;
+    }
+    .hero .tabs ul {
+        border-bottom: 1px solid #d3d6db;
+    }
+
+</style>
+
+<body>
+  <div class="columns" style="background-color: white" >
+    <aside class="column is-2 aside hero is-fullheight is-hidden-mobile">
+      <div>
+        <div class="main">
+            <div class="title"><strong>D</strong>ata <strong>F</strong>loor</div>
+          <a href="/dashboard" class="item "><span class="icon"><i class="fa fa-home"></i></span><span class="name">Dashboard</span></a>
+          <a href="/upload" class="item active"><span class="icon"><i class="fa fa-plus-square"></i></span><span class="name">New Classifier</span></a>
+          <a href="/market" class="item"><span class="icon"><i class="fa fa-shopping-bag"></i></span><span class="name">ML Marketplace</span></a>
+        </div>
+      </div>
+    </aside>
+    <div class="column is-10 admin-panel">
+      <nav class="nav has-shadow" id="top">
+        <div class="container">
+          <div class="nav-left">
+            <a class="nav-item" href="#">
+              <img src="{%static 'img/logo.png' %}" style="max-width: 25px ;width : 25px ; height: auto" alt="Datafloor logo">
+            </a>
+          </div>
+            <div class="nav-right"><a href="/logout" class="nav-item" >Log out</a></div>
+          <span class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <div class="nav-right nav-menu is-hidden-tablet">
+            <a href="/dashboard" class="nav-item">
+              Dashboard
+            </a>
+            <a href="/upload" class="nav-item is-active">
+              New Classifier
+            </a>
+            <a href="/market" class="nav-item">
+              ML MarketpLace
+            </a>
+
+          </div>
+        </div>
+      </nav>
+      <section class="hero is-small">
+        <!-- Hero content: will be in the middle -->
+        <div class="hero-body" style="margin-top: 10px ; margin-bottom: 10px">
+          <div class="container" align="center">
+            <h1 class="title">
+              Create a New Classifier
+            </h1>
+            <h2 class="subtitle">
+Upload Classifier            </h2>
+          </div>
+        </div>
+
+        <!-- Hero footer: will stick at the bottom -->
+
+      </section>
+
+
+
+        <section >
+
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+           {% csrf_token %}
+
+        <div id="dragndropimage" class="uploadimage-dragndrop">
+            <div class="uploadimage-text">Drag Your Csv Files Here</div>
+            <div class="subtitle">Or, if you prefer...</div>
+            <div class="uploadimage-input subtitle">
+                <input class="button-form" type="file" multiple="multiple" name="data" id="upload-input" />
+            </div>
+                        <input style="width: 80px ; height: auto" type="submit" class="button is-success is-focused is-centered" value="Upload" />
+
+        </div>
+                    </form>
+
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+  <footer class="footer" >
+  <div class="container">
+    <div class="has-text-centered">
+      <p>
+        <strong>Datafloor</strong> by <a href="http://zenindia.xyz">ZenIndia</a>
+      </p>
+      <p>
+        <a class="icon" href="#">
+          <i class="fa fa-github"></i>
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+  <script>
+
+(function() {
+    var burger = document.querySelector('.nav-toggle');
+    var menu = document.querySelector('.nav-menu');
+    burger.addEventListener('click', function() {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+    });
+})();
+      </script>
+<script type="text/javascript" src="{%static 'js/Jquery.js' %}"></script>
+<script type="text/javascript" src="{%static 'js/fileupload.js' %}"></script>
+
+</body>
+</html>

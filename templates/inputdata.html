@@ -1,15 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+        		{% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Creating Classifier - Datafloor</title>
+    <link rel="stylesheet" href="{%static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/bulma.css' %}">
+</head>
+<!--
+First landing page user sees all classifiers he made till now in card view .. option to train and option to classify - and train to test and api key and id
+Second landing page to upload a classifier - redirect to chosing the input and output options - back to dashboard
+Third option ML market Place
+Fourth option User details and feedback
+!-->
+
+
+<style>
+
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tg-list {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.tg-list-item {
+  margin: 0 2em;
+}
+
+.tgl {
+  display: none;
+}
+.tgl,
+.tgl:after,
+.tgl:before,
+.tgl *,
+.tgl *:after,
+.tgl *:before,
+.tgl + .tgl-btn {
+  box-sizing: border-box;
+}
+.tgl::-moz-selection,
+.tgl:after::-moz-selection,
+.tgl:before::-moz-selection,
+.tgl *::-moz-selection,
+.tgl *:after::-moz-selection,
+.tgl *:before::-moz-selection,
+.tgl + .tgl-btn::-moz-selection {
+  background: none;
+}
+.tgl::selection,
+.tgl:after::selection,
+.tgl:before::selection,
+.tgl *::selection,
+.tgl *:after::selection,
+.tgl *:before::selection,
+.tgl + .tgl-btn::selection {
+  background: none;
+}
+.tgl + .tgl-btn {
+    align-self: center;
+    text-align: center;
+  outline: 0;
+  display: block;
+    width: 100%;
+    height: 2em;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.tgl + .tgl-btn:after,
+.tgl + .tgl-btn:before {
+  position: relative;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 100%;
+}
+.tgl + .tgl-btn:after {
+  left: 0;
+}
+.tgl + .tgl-btn:before {
+  display: none;
+}
+.tgl:checked + .tgl-btn:after {
+  left: 50%;
+}
+
+.tgl-skewed + .tgl-btn {
+  overflow: hidden;
+  -webkit-transform: skew(-10deg);
+          transform: skew(-10deg);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  font-family: sans-serif;
+  background: #888;
+}
+.tgl-skewed + .tgl-btn:after,
+.tgl-skewed + .tgl-btn:before {
+  -webkit-transform: skew(5deg);
+          transform: skew(5deg);
+  display: inline-block;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+    font-family: Roboto;
+    font-style: normal;
+  line-height: 2em;
+  font-weight: 500;
+  color: whitesmoke;
+
+}
+.tgl-skewed + .tgl-btn:after {
+  left: 100%;
+  content: attr(data-tg-on);
+}
+.tgl-skewed + .tgl-btn:before {
+  left: 0;
+  content: attr(data-tg-off);
+}
+.tgl-skewed + .tgl-btn:active {
+  background: #888;
+}
+.tgl-skewed + .tgl-btn:hover {
+  background: #D36060;
+}
+
+.tgl-skewed + .tgl-btn:active:before {
+  left: -10%;
+}
+.tgl-skewed:checked + .tgl-btn {
+  background: #87C656;
+}
+.tgl-skewed:checked + .tgl-btn:before {
+  left: -100%;
+}
+.tgl-skewed:checked + .tgl-btn:after {
+  left: 0;
+}
+.tgl-skewed:checked + .tgl-btn:active:after {
+  left: 10%;
+}
+
+
+
+    </style>
+
+
+<style>
+
+
+.morris-hover{position:absolute;z-index:1000}.morris-hover.morris-default-style{border-radius:10px;padding:6px;color:#666;background:rgba(255,255,255,0.8);border:solid 2px rgba(230,230,230,0.8);font-family:sans-serif;font-size:12px;text-align:center}.morris-hover.morris-default-style .morris-hover-row-label{font-weight:bold;margin:0.25em 0}
+.morris-hover.morris-default-style .morris-hover-point{white-space:nowrap;margin:0.1em 0}
+    body {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        height: 100%;
+    }
+    .button.is-success {
+        background-color: #2EB398;
+    }
+    .nav.is-dark {
+        background-color: #232B2D;
+        color: #F6F7F7;
+    }
+    .nav.is-dark .nav-item a, .nav.is-dark a.nav-item {
+        color: #F6F7F7;
+    }
+    .nav.is-dark .nav-item a.button.is-default {
+        color: #F6F7F7;
+        background-color: transparent;
+        border-width: 2px;
+    }
+    .aside {
+        background-color: #354052;
+        margin-right: -10px;
+    }
+    .aside .main {
+        padding: 40px;
+        color: #6F7B7E;
+    }
+    .aside .title {
+        color: #6F7B7E;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .aside .main .item {
+        display: block;
+        padding: 10px 0;
+        color: #6F7B7E;
+    }
+    .aside .main .item.active {
+        color: #F6F7F7;
+    }
+    .aside .main .icon {
+        font-size: 19px;
+        padding-right: 30px;
+    }
+    .aside .main .name {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .admin-panel {
+        min-height: 100%;
+        margin-bottom: -10px;
+        padding-bottom: -3px;
+    }
+    .content {
+        display: block;
+        background-color: #fff;
+        padding: 40px 20px;
+    }
+    .hero .tabs ul {
+        border-bottom: 1px solid #d3d6db;
+    }
+
+</style>
+<body>
+  <div class="columns" style="background-color: white;" >
+    <aside class="column is-2 aside hero is-fullheight is-hidden-mobile">
+      <div>
+        <div class="main">
+            <div class="title"><strong>D</strong>ata <strong>F</strong>loor</div>
+          <a href="/dashboard" class="item"><span class="icon"><i class="fa fa-home"></i></span><span class="name">Dashboard</span></a>
+          <a href="/upload" class="item active"><span class="icon"><i class="fa fa-plus-square"></i></span><span class="name">New Classifier</span></a>
+          <a href="/market" class="item"><span class="icon"><i class="fa fa-shopping-bag"></i></span><span class="name">ML Marketplace</span></a>
+        </div>
+      </div>
+    </aside>
+    <div class="column is-10 admin-panel">
+      <nav class="nav has-shadow" id="top">
+        <div class="container">
+          <div class="nav-left">
+            <a class="nav-item" href="#">
+              <img src="{%static 'img/logo.png' %}" style="max-width: 25px ;width : 25px ; height: auto" alt="Datafloor logo">
+            </a>
+          </div>
+            <div class="nav-right"><a href="/logout" class="nav-item" >Log out</a></div>
+          <span class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <div class="nav-right nav-menu is-hidden-tablet">
+            <a href="/dashboard" class="nav-item ">
+              Dashboard
+            </a>
+            <a href="/upload" class="nav-item is-active">
+              New Classifier
+            </a>
+            <a href="/market" class="nav-item">
+              ML MarketpLace
+            </a>
+
+          </div>
+        </div>
+      </nav>
+      <section class="hero is-small">
+        <!-- Hero content: will be in the middle -->
+        <div class="hero-body" style="margin-top: 10px ; margin-bottom: 10px">
+          <div class="container" align="center">
+            <h1 class="title">
+              Select Data Fields to Train on
+            </h1>
+            <h2 class="subtitle">
+        This can be Modified later
+            </h2>
+          </div>
+        </div>
+
+
+      </section>
+
+
+        <section>
 <form action="/updateclass" method="POST">
-<input type="hidden" name="key" value="{{key}}">
-<input type="hidden" name="classifierid" value="{{id}}">
+    <!--Bad things Happen if you change this ... Stay away from the Dark side  -->
 {% csrf_token %}
-<p>Input Data <br></p>
+<input type="hidden" name="key" value={{key}}>
+<input type="hidden" name="classifierid" value={{id}}>
+        <!-- May the Force be with you   -->
+
+            <div class="columns">
+  <div class="column is-4  is-t" align="center">
+<p class="title" style="color: dimgrey">Input Data <br></p>
+
+      <ul class="tg-list" style="padding-left: 20px ;  margin-top: -3px ">
+          <div class="column " style="float: right;">
 {% for x in input %}
-<input type="checkbox" name="{{x}}" label="{{x}}" value="x">
-<label for={{x}}>{{x}}<br></label>
+  <li class="tg-list-item is-centered" style="margin: 10px ; padding-top: 10px" >
+    <input style=" position: static; min-width: 150px ; height: auto ; width: 150px" class="tgl tgl-skewed"  id="{{x}}"  name="{{x}}" type="checkbox"/>
+    <label class="tgl-btn" data-tg-off="Leave {{ x }}" data-tg-on="Include {{ x }}" for="{{x}}"></label>
+  </li>
 {% endfor %}
-{% for y in input %}
-<input type="radio" name="y" value="{{y}}" >
-<label for={{y}}>{{y}}</label>
-{% endfor %}
-<input type="submit" name="submit" value="Submit">
+          </div>
+</ul>
+    </div>
+
+
+
+
+
+  <div class="column is-4 is-centered" align="center"  >
+      <p class="title" style="color: dimgrey">Classifier <br></p>
+    <p class="control is-centered" align="center" style="padding-left: 25% ; padding-top: 25px">
+  <span class="select is-large is-primary is-focused " >
+    <select name="classifier">
+        {% for y in classifier %}
+      <option value="{{y}}">{{ y }}</option>
+        {% endfor %}
+    </select>
+  </span>
+</p>
+  </div>
+
+  <div class="column is-4 is-centered" align="center"  >
+      <p class="title" style="color: dimgrey">Output Data<br></p>
+    <p class="control is-centered" align="center" style="padding-left: 25% ; padding-top: 25px">
+  <span class="select is-large is-primary is-focused " >
+    <select name="y">
+        {% for y in input %}
+      <option value="{{y}}">{{ y }}</option>
+        {% endfor %}
+    </select>
+  </span>
+</p>
+  </div>
+
+
+</div>
+
+    <p class="control has-addons has-addons-centered"  style="padding-bottom: 30px ; padding-top: 10px">
+      <input class="input is-large" name="name" type="text" placeholder="Name This Classifier">
+    <input class="button is-focused is-large is-success is-centered" type="submit" name="submit" value="Submit"></p>
+
 </form>
+
+        </section>
+
+
+
+    </div>
+</div>
+<footer class="footer" >
+  <div class="container">
+    <div class="has-text-centered">
+      <p>
+        <strong>Datafloor</strong> by <a href="http://zenindia.xyz">ZenIndia</a>
+      </p>
+      <p>
+        <a class="icon" href="#">
+          <i class="fa fa-github"></i>
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+  <script>
+
+(function() {
+    var burger = document.querySelector('.nav-toggle');
+    var menu = document.querySelector('.nav-menu');
+    burger.addEventListener('click', function() {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+    });
+})();
+      </script>
+<script type="text/javascript" src="{%static 'js/Jquery.js' %}"></script>
+</body>
+</html>

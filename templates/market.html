@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+        		{% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MLMarket - DataFloor</title>
+    <link rel="stylesheet" href="{%static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/bulma.css' %}">
+</head>
+<!--
+First landing page user sees all classifiers he made till now in card view .. option to train and option to classify - and train to test and api key and id
+Second landing page to upload a classifier - redirect to chosing the input and output options - back to dashboard
+Third option ML market Place
+Fourth option User details and feedback
+!-->
+
+ <style>
+
+
+        #carddata > *
+        {
+            align-self: center;
+            align-content: center;
+            align-items: center;
+            text-align: center;
+            float: left;
+            position: relative;
+            width: 350px;
+            height:350px;
+            margin: 10px;
+            margin-top: 30px;
+            border: 0.1px solid #69306D;
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+            -ms-border-radius: 15px;
+            -o-border-radius: 15px;
+            border-radius: 15px;
+            -webkit-box-shadow: #301632 2px 2px 2px;
+            -moz-box-shadow: #301632 2px 2px 2px;
+            box-shadow: #301632 3px 3px 8px;
+        }
+        #carddata:after
+        {
+            content: " ";
+            clear: both;
+            display: table;
+        }
+        #carddata .nr, #carddata .date
+        {
+            align-self: center;
+            display: inline-block;
+            margin: 5px;
+            padding: 0 5px;
+            width: auto;
+            background: #777;
+            color: black;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+
+    </style>
+
+<style>
+
+
+.morris-hover{position:absolute;z-index:1000}.morris-hover.morris-default-style{border-radius:10px;padding:6px;color:#666;background:rgba(255,255,255,0.8);border:solid 2px rgba(230,230,230,0.8);font-family:sans-serif;font-size:12px;text-align:center}.morris-hover.morris-default-style .morris-hover-row-label{font-weight:bold;margin:0.25em 0}
+.morris-hover.morris-default-style .morris-hover-point{white-space:nowrap;margin:0.1em 0}
+    body {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        height: 100%;
+    }
+    .button.is-success {
+        background-color: #2EB398;
+    }
+    .nav.is-dark {
+        background-color: #232B2D;
+        color: #F6F7F7;
+    }
+    .nav.is-dark .nav-item a, .nav.is-dark a.nav-item {
+        color: #F6F7F7;
+    }
+    .nav.is-dark .nav-item a.button.is-default {
+        color: #F6F7F7;
+        background-color: transparent;
+        border-width: 2px;
+    }
+    .aside {
+        background-color: #354052;
+        margin-right: -10px;
+    }
+    .aside .main {
+        padding: 40px;
+        color: #6F7B7E;
+    }
+    .aside .title {
+        color: #6F7B7E;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .aside .main .item {
+        display: block;
+        padding: 10px 0;
+        color: #6F7B7E;
+    }
+    .aside .main .item.active {
+        color: #F6F7F7;
+    }
+    .aside .main .icon {
+        font-size: 19px;
+        padding-right: 30px;
+    }
+    .aside .main .name {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .admin-panel {
+        min-height: 100%;
+        margin-bottom: -10px;
+        padding-bottom: -3px;
+    }
+    .content {
+        display: block;
+        background-color: #fff;
+        padding: 40px 20px;
+    }
+    .hero .tabs ul {
+        border-bottom: 1px solid #d3d6db;
+    }
+
+</style>
+<body>
+  <div class="columns" style="background-color: white" >
+    <aside class="column is-2 aside hero is-fullheight is-hidden-mobile">
+      <div>
+        <div class="main">
+            <div class="title"><strong>D</strong>ata <strong>F</strong>loor</div>
+          <a href="/dashboard" class="item"><span class="icon"><i class="fa fa-home"></i></span><span class="name">Dashboard</span></a>
+          <a href="/upload" class="item"><span class="icon"><i class="fa fa-plus-square"></i></span><span class="name">New Classifier</span></a>
+          <a href="/market" class="item active"><span class="icon"><i class="fa fa-shopping-bag"></i></span><span class="name">ML Marketplace</span></a>
+        </div>
+      </div>
+    </aside>
+    <div class="column is-10 admin-panel">
+      <nav class="nav has-shadow" id="top">
+        <div class="container">
+          <div class="nav-left">
+            <a class="nav-item" href="#">
+              <img src="{%static 'img/logo.png' %}" style="max-width: 25px ;width : 25px ; height: auto" alt="Datafloor logo">
+            </a>
+          </div>
+            <div class="nav-right"><a href="/logout" class="nav-item" >Log out</a></div>
+          <span class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <div class="nav-right nav-menu is-hidden-tablet">
+            <a href="/dashboard" class="nav-item">
+              Dashboard
+            </a>
+            <a href="/upload" class="nav-item">
+              New Classifier
+            </a>
+            <a href="/market" class="nav-item is-active">
+              ML MarketpLace
+            </a>
+
+          </div>
+        </div>
+      </nav>
+      <section class="hero is-small">
+        <!-- Hero content: will be in the middle -->
+        <div class="hero-body" style="margin-top: 10px ; margin-bottom: 10px">
+          <div class="container" align="center">
+            <h1 class="title">
+              Welcome To the ML Market
+            </h1>
+            <h2 class="subtitle">
+Avaliable Classifiers            </h2>
+          </div>
+        </div>
+
+        <!-- Hero footer: will stick at the bottom -->
+
+      </section>
+
+
+
+        <section >
+
+
+            <div class="tab-body  active" align="center">
+
+
+        <div id="carddata" align="center" style="padding-right:20px;margin-left: 6%; margin-top: 100px ; margin-bottom: 100px">
+
+    {% for e in data %}
+            <div class="card" style="margin-right:6% ">
+
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <p class="subtitle is-4" align="center" >#1</p>
+                            <br>
+                            <p class="title is-4" align="center"><strong>{{ e.name }}</strong></p>
+
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p class="subtitle"> {{ e.desc }}...</p>
+                        <br>
+                        <br>
+                                                        <a href="{{ e.url }}" class="button is-info is-focused is-outlined" style="margin-top: 15px">
+                            <span class="icon" >
+                              <i class="fa fa-info-circle"></i>
+                            </span>
+                            <span>Details</span>
+                          </a>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+    </div>
+            </div>
+
+
+
+
+
+
+                    </section>
+
+</div>
+<footer class="footer" >
+  <div class="container">
+    <div class="has-text-centered">
+      <p>
+        <strong>Datafloor</strong> by <a href="http://zenindia.xyz">ZenIndia</a>
+      </p>
+      <p>
+        <a class="icon" href="#">
+          <i class="fa fa-github"></i>
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+  <script>
+
+(function() {
+    var burger = document.querySelector('.nav-toggle');
+    var menu = document.querySelector('.nav-menu');
+    burger.addEventListener('click', function() {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+    });
+})();
+      </script>
+<script type="text/javascript" src="{%static 'js/Jquery.js' %}"></script>
+</body>
+</html>

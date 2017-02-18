@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 import os
 import sys
+from nltk.classify import ClassifierI
+
+
+class VoteClassifier(ClassifierI):
+    pass
+
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "datafloor.settings")
