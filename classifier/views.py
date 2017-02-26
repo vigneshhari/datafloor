@@ -30,7 +30,6 @@ import csv
 
 
 
-
 class classifier():
 
     def __init__(self,id,key,type,call,classifier,input = {},inputset = "" , outputset=""):
@@ -259,9 +258,7 @@ class classifier():
     def sentimentclassify(self):
         t1 = time.time()
         class VoteClassifier(ClassifierI):
-
-            def __init__(self, *classifiers):
-                self._classifiers = classifiers
+            pass
 
         word_features5k_f = open("upload/word_features5k.pickle", "rb")
         word_features = pickle.load(word_features5k_f)
@@ -277,7 +274,7 @@ class classifier():
 
         def classify(features):
             votes = []
-            for c in voted_classifier._classifiers:
+            for c in voted_classifier._classifiers[0]:
                 v = c.classify(features)
                 votes.append(v)
             choice_votes = votes.count(mode(votes))
@@ -289,17 +286,13 @@ class classifier():
             features = {}
             for w in word_features:
                 features[w] = (w in words)
-
-            for i in words:
-                try:
-                    print(i, ' : ', features[i])
-                except:
-                    pass
             return features
         print(time.time() - t1)
         return({self.outputset : sentiment(self.input["sentence"])})
 
     def sentimenttrain(self):
+        class VoteClassifier(ClassifierI):
+            pass
         data = classifierspre.objects.all().filter(classifier=self.classifier)
         models = []
         for i in data:
@@ -309,6 +302,8 @@ class classifier():
             temp = pickle.load(data)
             savel = open("upload/" + self.key +  i.strip(), "wb")
             pickle.dump(temp,savel)
+            data.close()
+            savel.close()
         return({"Accuracy" : " -%  Sucessfully Updated Trained Model"})
 
     def perform(self):
@@ -319,8 +314,3 @@ class classifier():
         funcall =   self.call.strip() + self.classifier.strip()
         data =  (funcs[funcall]())
         return(data)
-
-
-
-
-

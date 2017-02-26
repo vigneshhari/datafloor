@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+
 import os
 import sys
 from nltk.classify import ClassifierI
