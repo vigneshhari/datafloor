@@ -288,7 +288,11 @@ class classifier():
                 features[w] = (w in words)
             return features
         print(time.time() - t1)
-        return({self.outputset : sentiment(self.input["sentence"])})
+        val = sentiment(self.input["sentence"].lower())
+        if val == 'pos':
+            return({self.outputset : " Positive" })
+        return({self.outputset : " Negative" })
+
 
     def sentimenttrain(self):
         class VoteClassifier(ClassifierI):
