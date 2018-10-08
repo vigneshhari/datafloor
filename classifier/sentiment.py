@@ -6,7 +6,7 @@ from nltk.classify import ClassifierI
 from statistics import mode
 from nltk.tokenize import word_tokenize
 import time
-t1 = time.time()
+
 
 from nltk.classify import ClassifierI
 
